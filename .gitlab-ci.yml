@@ -1,0 +1,86 @@
+stages:
+  - build
+  - test
+  - deploy
+
+develop_公司測試環境編譯並打包_job:
+  stage: build
+  image: node:20.10.0
+  only:
+    - develop
+  script:
+    - cat ${ENV_DEVELOPMENT_AS_CONTEXT} > ./.env.development
+    - corepack enable
+    - yarn install
+    - yarn build:development
+    - cat ${IISNODE_INDEX_JS} > .output/index.js
+    - cat ${IISNODE_DEVELOPMENT_WEB_CONFIG} > .output/web.config
+  artifacts:
+    name: RootNuxtTemplate_dev_build_$CI_BUILD_ID
+    paths:
+      - .output
+    expire_in: 1 week
+
+develop_公司測試環境(site)編譯並打包_job:
+  stage: build
+  image: node:20.10.0
+  only:
+    - develop
+  script:
+    - cat ${ENV_DEVELOPMENT_AS_SITE} > ./.env.development
+    - corepack enable
+    - yarn install
+    - yarn build:development
+    - cat ${IISNODE_INDEX_JS} > .output/index.js
+    - cat ${IISNODE_DEVELOPMENT_WEB_CONFIG} > .output/web.config
+  artifacts:
+    name: RootNuxtTemplate_dev_site_build_$CI_BUILD_ID
+    paths:
+      - .output
+    expire_in: 1 week
+
+develop_公司測試環境程式遠端部署_job:
+  stage: deploy
+  tags:
+    - windows
+  only:
+    - develop
+  needs:
+    - develop_公司測試環境編譯並打包_job
+  script:
+    - (Get-Content ${PACK_OUTPUT_TO_PUBLISH_POWERSHELL} -Encoding UTF8 | Out-String) | Set-Content .\pack_output_to_publish.ps1 -Encoding UTF8
+    - (Get-Content ${DEPLOY_AS_CONTEXT_DEVELOPMENT_POWERSHELL} -Encoding UTF8 | Out-String) | Set-Content .\deploy.ps1 -Encoding UTF8
+    - .\pack_output_to_publish.ps1
+    - .\deploy.ps1
+  artifacts:
+    name: RootNuxtTemplate_dev_published_$CI_BUILD_ID
+    paths:
+      - ./publish/publish.zip
+    expire_in: 1 week
+
+develop_公司測試環境(site)程式遠端部署_job:
+  stage: deploy
+  tags:
+    - windows
+  only:
+    - develop
+  needs:
+    - develop_公司測試環境(site)編譯並打包_job
+  script:
+    - (Get-Content ${PACK_OUTPUT_TO_PUBLISH_POWERSHELL} -Encoding UTF8 | Out-String) | Set-Content .\pack_output_to_publish.ps1 -Encoding UTF8
+    - (Get-Content ${DEPLOY_AS_SITE_DEVELOPMENT_POWERSHELL} -Encoding UTF8 | Out-String) | Set-Content .\deploy.ps1 -Encoding UTF8
+    - .\pack_output_to_publish.ps1
+    - .\deploy.ps1
+  artifacts:
+    name: RootNuxtTemplate_dev_site_published_$CI_BUILD_ID
+    paths:
+      - ./publish/publish.zip
+    expire_in: 1 week
+
+# 靜態測試
+sast:
+  variables:
+    SAST_EXCLUDED_ANALYZERS: bandit, brakeman, eslint, flawfinder, gosec, kubesec, nodejs-scan, phpcs-security-audit, pmd-apex, sobelow, spotbugs, security-code-scan
+  stage: test
+include:
+  - template: Security/SAST.gitlab-ci.yml

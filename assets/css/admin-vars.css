@@ -1,0 +1,132 @@
+:root {
+  /* layout vars */
+  --admin-navbar-height: 82px;
+  --admin-sub-navbar-height: 65px;
+  --admin-tagbar-height: 2.5rem;
+  --admin-sidebar-width: 280px;
+  --admin-sidebar-collapse-width: calc(var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2);
+
+  --admin-top-bg-color: var(--el-color-primary);
+  --admin-top-text-color: var(--el-color-white);
+  /* --admin-nav-bg-color: #99d7e9; */
+  --admin-nav-bg-color: var(--el-color-primary-light-7);
+  --admin-sidebar-bg-color: var(--el-color-primary-dark-2);
+  /* --admin-sidebar-text-color: #e5eaf3; */
+  --admin-sidebar-text-color: var(--el-color-white);
+  --admin-sidebar-active-color: var(--el-color-white);
+  /* --admin-sidebar-hover-bg-color: #33afd3; */
+  /* --admin-sidebar-hover-bg-color: var(--el-color-primary-dark-2); */
+  --admin-table-header-bg-color: var(--el-color-primary-light-5);
+  --admin-table-header-text-color: var(--el-color-primary-dark-2);
+  --admin-table-text-color: #var(--el-text-color-primary);
+  --admin-fill-color-lighter: #EBEDF0;
+  --admin-pagination-button-color: var(--el-text-color-regular);
+  --admin-pagination-bg-color: #EBEDF0;
+  --admin-pagination-margin: 2px;
+  --admin-pagination-hover-color: var(--el-color-white);
+  --admin-pagination-hover-bg-color: var(--el-color-primary-dark-2);
+
+  /* --el-font-family: '微軟正黑體', 'Times New Roman'; */
+  --el-font-family: 'Myriad Variable Concept', '華康儷粗黑';
+
+  /* 預設模板色系 */
+  --el-color-primary: #818181;
+  --el-color-primary-light-3: #a7a7a7;
+  --el-color-primary-light-5: #c0c0c0;
+  --el-color-primary-light-7: #d9d9d9;
+  --el-color-primary-light-8: #e6e6e6;
+  --el-color-primary-light-9: #f2f2f2;
+  --el-color-primary-dark-2: #676767;
+
+  /* --el-color-primary: #009bc8;
+  --el-color-primary-light-3: #4db9d9;
+  --el-color-primary-light-5: #80cde4;
+  --el-color-primary-light-7: #b3e1ef;
+  --el-color-primary-light-8: #ccebf4;
+  --el-color-primary-light-9: #e6f5fa;
+  --el-color-primary-dark-2: #007ca0; */
+
+  --el-font-size-extra-large: 26px;
+  --el-font-size-large: 24px;
+  --el-font-size-medium: 22px;
+  --el-font-size-base: 20px;
+  --el-font-size-small: 18px;
+  --el-font-size-extra-small: 16px;
+}
+.el-sub-menu span {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.el-table {
+  color: var(--admin-table-text-color);
+}
+.el-row+.el-table {
+  margin-top: 1rem;
+}
+.el-table th.el-table__cell {
+  background-color: var(--admin-table-header-bg-color);
+  color: var(--admin-table-header-text-color);
+}
+.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+  background: var(--admin-fill-color-lighter);
+}
+.el-table td {
+  font-size: var(--el-font-size-small);
+}
+.el-pager li {
+  font-size: var(--el-font-size-small);
+
+}
+.el-pager li, .el-pagination button {
+  color: var(--admin-pagination-button-color);
+  background: var(--admin-pagination-bg-color);
+  margin: var(--admin-pagination-margin);
+}
+.el-pager li.is-active {
+  color: var(--admin-pagination-hover-color);
+  background-color: var(--admin-pagination-hover-bg-color);
+}
+.el-pagination {
+  --el-pagination-font-size: var(--el-font-size-small);
+}
+.el-breadcrumb {
+  font-size: var(--el-font-size-base);
+}
+/* .el-table .el-button {
+  --el-button-text-color: var(--el-color-primary-dark-2);
+  --el-button-bg-color: var(--el-color-primary-light-5);
+  --el-button-border-color: var(--el-color-primary-light-5);
+  --el-button-outline-color: var(--el-color-primary-light-7);
+  --el-button-active-color: var(--el-color-primary);
+  --el-button-hover-text-color: var(--el-color-primary-dark-2);
+  --el-button-hover-link-text-color: var(--el-color-primary-light-3);
+  --el-button-hover-bg-color: var(--el-color-primary-light-7);
+  --el-button-hover-border-color: var(--el-color-primary-light-7);
+  --el-button-active-bg-color: var(--el-color-primary-light-3);
+  --el-button-active-border-color: var(--el-color-primary-light-3);
+  --el-button-disabled-text-color: var(--el-color-primary-light-7);
+  --el-button-disabled-bg-color: var(--el-color-primary-light-9);
+  --el-button-disabled-border-color: var(--el-color-primary-light-9);
+} */
+
+.el-notification.notification-success {
+  border-color: var(--el-color-success);
+}
+.el-notification.notification-info {
+  border-color: var(--el-color-info);
+}
+.el-notification.notification-warning {
+  border-color: var(--el-color-warning);
+}
+.el-notification.notification-error {
+  border-color: var(--el-color-danger);
+}
+.el-input {
+  --el-input-border-color: #A8ABB2;
+}
+.el-checkbox__label{
+  font-size: var(--el-font-size-medium);
+}
+.el-transfer-panel{
+  width: 35%;
+}

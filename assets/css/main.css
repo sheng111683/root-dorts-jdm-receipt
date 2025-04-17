@@ -1,0 +1,45 @@
+@import "doc-vars.css";
+@import "admin-vars.css";
+@import "normalize.css";
+
+@font-face {
+  font-family: 'Myriad Variable Concept';
+  src: url('/fonts/MyriadVariableConcept-Roman.ttf') format('woff');
+}
+
+@font-face {
+  font-family: '華康儷粗黑';
+  src: url('/fonts/DFLiHei-W7-WIN-BF.ttc') format('woff');
+}
+
+:root {
+  /* font vars */
+  /* --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; */
+  /* --font-family: '微軟正黑體', 'Times New Roman'; */
+  --font-family: 'Myriad Variable Concept', '華康儷粗黑';
+  --font-family-code: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+
+  /* transition vars */
+  --t-transform: 0.3s ease;
+}
+
+body {
+  font-size: var(--el-font-size-medium);
+}
+
+button, input {
+  font-family: var(--font-family)
+}
+
+.el-table {
+  font-size: var(--el-font-size-base);
+}
+
+.el-loading-parent--relative {
+  /* fix global loading bug in admin3 */
+  position: static !important;
+}
+
+.form-max-width {
+  max-width: 600px;
+}

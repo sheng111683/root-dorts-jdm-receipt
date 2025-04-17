@@ -1,0 +1,15 @@
+export default defineAppConfig({
+  title: 'JDM 收據管理系統',
+  fontSize: 'medium',
+  // themeDark: false,
+  // sidebarDark: false,
+  themeColor: '#009bc8',
+  // themeColor: '#236239',
+  // themeColor: '#1429a2',
+  // themeColor: '#1C7980',
+  sidebarWidth: 280,
+  sidebarCollapse: false,
+  navBreadcrumb: true,
+  tagbar: false,
+  transitionType: 'slide',
+})

@@ -68,6 +68,8 @@ export const ReceiptTypeSearch = generateEnum({
   聯開保證金: '聯開保證金',
   聯開雜項收入: '聯開雜項收入',
   聯開代收款: '聯開代收款',
+  一般建設基金: '一般建設基金',
+  建設基金保證金: '建設基金保證金',
 })
 
 export const ReceiptType = generateEnum({
@@ -80,6 +82,8 @@ export const ReceiptType = generateEnum({
   聯開保證金: '聯開保證金',
   聯開雜項收入: '聯開雜項收入',
   聯開代收款: '聯開代收款',
+  一般建設基金: '一般建設基金',
+  建設基金保證金: '建設基金保證金',
 })
 
 export const RemovedType = generateEnum({

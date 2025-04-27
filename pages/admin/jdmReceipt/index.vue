@@ -144,7 +144,8 @@ function resetAddForm() {
   criteriaAdd.paymentName = ''
   criteriaAdd.payMoney = ''
   criteriaAdd.receiptType = ''
-  criteriaAdd.makeDate = ''
+  criteriaAdd.makeDate = new Date()
+  criteriaAdd.paymentDate = new Date()
   criteriaAdd.removed = false
 }
 
@@ -281,6 +282,9 @@ async function handleAdd() {
   const currentROCYear = currentYear - 1911 // 轉換為民國年
   drawer.value = true
   criteriaAdd.year = currentROCYear.toString()
+  criteriaAdd.makeDate = new Date()
+  criteriaAdd.paymentDate = new Date()
+
 }
 </script>
 
@@ -528,6 +532,13 @@ async function handleAdd() {
                         </div>
                       </el-form-item>
                     </el-col>
+                    <el-col :lg="12" :xl="12" :xs="24" :sm="24">
+                      <el-form-item label="繳庫日期:">
+                        <div class="block">
+                          <el-date-picker v-model="criteriaAdd.paymentDate" type="date" placeholder="" size="default" />
+                        </div>
+                      </el-form-item>
+                    </el-col>
                   </el-row>
                 </el-col>
               </el-row>
@@ -592,6 +603,11 @@ async function handleAdd() {
               <el-form-item label="製單日期:">
                 <div class="block">
                   <el-date-picker v-model="criteriaEdit.makeDate" type="date" placeholder="" size="default" />
+                </div>
+              </el-form-item>
+              <el-form-item label="繳庫日期:">
+                <div class="block">
+                  <el-date-picker v-model="criteria.paymentDate" type="date" placeholder="" size="default" />
                 </div>
               </el-form-item>
               <el-row :gutter="20">

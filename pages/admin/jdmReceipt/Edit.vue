@@ -120,6 +120,11 @@ onActivated(() => {
                 <el-date-picker v-model="criteria.makeDate" type="date" placeholder="" size="default" />
               </div>
             </el-form-item>
+            <el-form-item label="繳庫日期:">
+              <div class="block">
+                <el-date-picker v-model="criteria.paymentDate" type="date" placeholder="" size="default" />
+              </div>
+            </el-form-item>
 
             <el-row :gutter="20">
               <el-col :span="24">

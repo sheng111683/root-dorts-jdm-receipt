@@ -20,6 +20,14 @@ export default defineNuxtConfig({
             ]
           : []),
       ],
+      script: [
+        {
+          src: `${process.env.NUXT_APP_BASE_URL === '/' ? '/' : `${process.env.NUXT_APP_BASE_URL}/`}scripts/smartCardSign.js`,
+          type: 'text/javascript',
+          async: true,
+          tagPosition: 'bodyClose',
+        },
+      ],
     },
   },
   runtimeConfig: {

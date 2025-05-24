@@ -64,7 +64,7 @@ function formatDates(certDate) {
     const year = certDateObj.getFullYear()
     const month = String(certDateObj.getMonth() + 1).padStart(2, '0')
     const day = String(certDateObj.getDate()).padStart(2, '0')
-    criteria.certDate = `${year}/${month}/${day}`
+    criteria.certDate = `${year}-${month}-${day}`
   }
 
   return criteria

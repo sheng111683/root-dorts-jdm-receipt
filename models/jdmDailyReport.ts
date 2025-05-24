@@ -1,13 +1,4 @@
 // 記得將 export 加入到 ./index.ts
-
-// export interface JdmDailyReport {
-//   agency: string,
-//   printType: string,
-//   handleType: string,
-//   type: string,
-//   certDate: string | Date,
-// }
-
 export interface MemoList {
   agency: string,
   certDate: string | Date,
@@ -42,38 +33,3 @@ export function fromMemoListMapper(item: MemoList) {
     ...obj,
   }
 }
-
-// export function jdmDailyReportMapper(item: JdmDailyReport) {
-//   const {
-//     agency,
-//     printType,
-//     handleType,
-//     type,
-//     certDate
-//   } = item
-//   return {
-//     agency,
-//     printType,
-//     handleType,
-//     type,
-//     certDate
-//   }
-// }
-
-// export function fromRawJdmDailyReportMapper(item: JdmDailyReport) {
-//   const obj = jdmDailyReportMapper(item)
-//   return {
-//     ...obj,
-//     certDate: (new Date(new Date(obj.certDate).getTime() + 28800000)),
-//   }
-// }
-
-// export function getDefaultjdmDailyReport(): JdmDailyReport {
-//   return {
-//     agency: '',
-//     printType: '',
-//     handleType: '',
-//     type: '1',
-//     certDate: '',
-//     }
-// }

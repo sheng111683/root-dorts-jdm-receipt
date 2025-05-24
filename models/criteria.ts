@@ -293,3 +293,14 @@ export function getDefaultagencyapply() {
     value: '',
   }, getDefaultCriteria())
 }
+
+export function getDefulatDailyReportCriteria() {
+  return Object.assign({
+    agency: '',
+    printType: '',
+    handleType: '',
+    type: '0',
+    certDate: '',
+    encryptionId: '',
+  }, getDefaultCriteria())
+}

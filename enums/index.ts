@@ -86,6 +86,21 @@ export const ReceiptType = generateEnum({
   建設基金保證金: '建設基金保證金',
 })
 
+export const DailyReportPrintTypeSearch = generateEnum({
+  重置基金: '重置基金',
+  雜項: '雜項',
+  建設基金: '建設基金',
+  其他: '其他',
+  '土地基金(雜項)': '土地基金(雜項)',
+  '土開基金(代收款)': '土開基金(代收款)',
+  '土開基金(保證金)': '土開基金(保證金)',
+})
+
+export const DailyReportHandleType = generateEnum({
+  列印: '列印',
+  備註摘要: '備註摘要',
+})
+
 export const RemovedType = generateEnum({
   false: '否',
   true: '是',

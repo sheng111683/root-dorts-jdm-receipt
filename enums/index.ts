@@ -114,6 +114,11 @@ export const MonthReportHandleType = generateEnum({
   備註摘要: '備註摘要',
 })
 
+export const ReceiptRegisterHandleType = generateEnum({
+  列印: '列印',
+  備註摘要: '備註摘要',
+})
+
 export const RemovedType = generateEnum({
   false: '否',
   true: '是',

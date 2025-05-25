@@ -315,3 +315,16 @@ export function getDefulatMonthReportCriteria() {
     encryptionId: '',
   }, getDefaultCriteria())
 }
+
+export function getDefulatReceiptRegisterCriteria() {
+  return Object.assign({
+    agency: '',
+    receiptType: '',
+    handleType: '',
+    type: '2',
+    receiptDateStart: '',
+    receiptDateEnd: '',
+    startPage: '1',
+    encryptionId: '',
+  })
+}

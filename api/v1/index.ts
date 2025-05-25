@@ -20,6 +20,7 @@ import * as StampManagementFile from './stampManagementFile'
 import * as JdmReceiptInvoice from './jdmReceiptInvoice'
 import * as JdmReceiptFile from './jdmReceiptFile'
 import * as JdmDailyReport from './jdmDailyReport' 
+import * as JdmMonthReport from './jdmMonthReport' 
 
 /** 將此階層的資料夾中的 modules export */
 export {
@@ -45,4 +46,5 @@ export {
   JdmReceiptInvoice,
   JdmReceiptFile,
   JdmDailyReport,
+  JdmMonthReport,
 }

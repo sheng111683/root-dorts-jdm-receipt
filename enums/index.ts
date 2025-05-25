@@ -96,7 +96,20 @@ export const DailyReportPrintTypeSearch = generateEnum({
   '土開基金(保證金)': '土開基金(保證金)',
 })
 
+export const MonthReportPrintTypeSearch = generateEnum({
+  土地開發基金: '土地開發基金',
+  重置基金: '重置基金',
+  雜項: '雜項',
+  其他: '其他',
+  建設基金: '建設基金',
+})
+
 export const DailyReportHandleType = generateEnum({
+  列印: '列印',
+  備註摘要: '備註摘要',
+})
+
+export const MonthReportHandleType = generateEnum({
   列印: '列印',
   備註摘要: '備註摘要',
 })

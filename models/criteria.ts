@@ -304,3 +304,14 @@ export function getDefulatDailyReportCriteria() {
     encryptionId: '',
   }, getDefaultCriteria())
 }
+
+export function getDefulatMonthReportCriteria() {
+  return Object.assign({
+    agency: '',
+    printType: '',
+    handleType: '',
+    type: '1',
+    certDate: '',
+    encryptionId: '',
+  }, getDefaultCriteria())
+}

@@ -328,3 +328,12 @@ export function getDefulatReceiptRegisterCriteria() {
     encryptionId: '',
   })
 }
+
+export function getDefulatReceiptRecordCriteria() {
+  return Object.assign({
+    agency: '',
+    receiptType: '',
+    printMonth: '',
+    encryptionId: '',
+  })
+}

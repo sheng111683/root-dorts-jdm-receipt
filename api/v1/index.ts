@@ -22,6 +22,7 @@ import * as JdmReceiptFile from './jdmReceiptFile'
 import * as JdmDailyReport from './jdmDailyReport' 
 import * as JdmMonthReport from './jdmMonthReport' 
 import * as JdmReceiptRegister from './jdmReceiptRegister' 
+import * as JdmReceiptRecord from './jdmReceiptRecord' 
 
 /** 將此階層的資料夾中的 modules export */
 export {
@@ -49,4 +50,5 @@ export {
   JdmDailyReport,
   JdmMonthReport,
   JdmReceiptRegister,
+  JdmReceiptRecord,
 }

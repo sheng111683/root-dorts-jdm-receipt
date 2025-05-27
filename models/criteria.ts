@@ -337,3 +337,13 @@ export function getDefulatReceiptRecordCriteria() {
     encryptionId: '',
   })
 }
+
+export function getDefulatReceiptPrintErrorCriteria() {
+  return Object.assign({
+    agency: '',
+    receiptType: '',
+    printDate: '',
+    type: '',
+    encryptionId: '',
+  })
+}

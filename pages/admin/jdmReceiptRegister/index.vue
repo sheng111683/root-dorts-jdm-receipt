@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { downloadFile } from '~/utils/downloadFile'
 import {
-  // getDefaultPageList,
   getDefaultagencyapply,
   getDefulatReceiptRegisterCriteria,
-  // memoListMapper,
-  // type MemoList,
-  // type PagedList,
 } from '~/models'
 import { ReceiptType, ReceiptRegisterHandleType } from '~/enums'
 
@@ -18,7 +14,6 @@ const { baseURL } = runtimeConfig.public
 const criteria = reactive(getDefulatReceiptRegisterCriteria())
 
 const addMemo = ref(false)
-// const queryResult = reactive(getDefaultPageList<any>())
 
 const drawerprint = ref(false)
 
@@ -34,23 +29,11 @@ async function search() {
   {
     criteria.receiptDateStart = formatDate(criteria.receiptDateStart)
     criteria.receiptDateEnd = formatDate(criteria.receiptDateEnd)
-    // const jdmReceiptMemoResponse = await $api.v1.JdmReceiptRegister.Get(criteria) as PagedList<MemoList>
-    // Object.assign(queryResult, jdmReceiptMemoResponse)
     if(criteria.handleType == '備註摘要')
     {
-      // if(Array.isArray(jdmReceiptMemoResponse.items) && jdmReceiptMemoResponse.items.length > 0 && jdmReceiptMemoResponse.items[0].memo != '')
-      // {
-      //   addMemo.value = false
-      // }
-      // else
-      // {
-      //   addMemo.value = true
-      // }
-      // return jdmReceiptMemoResponse
     }
     else if(criteria.handleType == '列印')
     {
-      // queryResult.items = []
       PrintReceiptRegister()
     }
   }
@@ -97,29 +80,6 @@ function checkQuery() {
   return returnFlag.value
 }
 
-// async function saveMemo() {
-//   const items = Array.isArray(queryResult.items) ? queryResult.items : []
-//   const memoList = items.map(item => ({...memoListMapper(item), certDate: criteria.certDate, type: 1, agency: criteria.agency }))
-//   Object.assign(criteria, queryResult.items)
-//   try {
-//     if(addMemo.value)
-//     {
-//       const { status }: any = await $api.v1.JdmReceiptRegister.Post(memoList)
-//       if (status && status !== 200)
-//         throw new Error('新增失敗')
-//       ElMessage.success('已新增')
-//     }
-//     else
-//     {
-//       const { status }: any = await $api.v1.JdmReceiptRegister.Put(memoList)
-//       if (status && status !== 200)
-//         throw new Error('更新失敗')
-//       ElMessage.success('已更新')
-//     }
-//   } catch (err) {
-//     alert('儲存失敗')
-//   }
-// }
 
 async function PrintReceiptRegister() {
   try {
@@ -155,7 +115,6 @@ function resetForm() {
   criteria.receiptDateStart = ''
   criteria.receiptDateEnd = ''
   criteria.startPage = '1'
-  // queryResult.items = []
 }
 
 </script>
@@ -240,28 +199,6 @@ function resetForm() {
             </el-row>
           </el-form>
         </el-card>
-
-        <!-- <el-card v-if="queryResult && queryResult.items && queryResult.items.length > 0" header="查詢結果" class="mt-4">
-          <el-table :data="queryResult.items" stripe style="width: 100%">
-            <el-table-column label="#" width="55">
-              <template #default="scope">
-                {{ scope.$index + 1 }}
-              </template>
-            </el-table-column>
-            <el-table-column prop="row" label="行號" align="center">
-              <template #default="scope">
-                <el-input v-model="scope.row.row" placeholder="輸入內容" />
-              </template>
-            </el-table-column>
-            <el-table-column prop="memo" label="摘要" align="center">
-              <template #default="scope">
-                <el-input v-model="scope.row.memo" placeholder="輸入內容" />
-              </template>
-            </el-table-column>
-          </el-table>
-
-          <el-button type="primary" class="mt-4" @click="saveMemo">儲存</el-button>
-        </el-card> -->
       </el-col>
     </el-row>
   </AdminContainer>

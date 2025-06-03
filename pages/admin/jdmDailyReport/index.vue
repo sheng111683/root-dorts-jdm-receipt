@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage} from 'element-plus'
 import { downloadFile } from '~/utils/downloadFile'
 import {
   getDefaultPageList,
   getDefaultagencyapply,
-  //getDefaultjdmDailyReport,
   getDefulatDailyReportCriteria,
-  getDefulatJDMReceiptPrintCriteria,
   memoListMapper,
   type MemoList,
   type PagedList,

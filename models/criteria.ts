@@ -299,7 +299,7 @@ export function getDefulatDailyReportCriteria() {
     agency: '',
     printType: '',
     handleType: '',
-    type: '0',
+    type: 'Daily',
     certDate: '',
     encryptionId: '',
   }, getDefaultCriteria())
@@ -310,7 +310,7 @@ export function getDefulatMonthReportCriteria() {
     agency: '',
     printType: '',
     handleType: '',
-    type: '1',
+    type: 'Month',
     certDate: '',
     encryptionId: '',
   }, getDefaultCriteria())
@@ -321,7 +321,7 @@ export function getDefulatReceiptRegisterCriteria() {
     agency: '',
     receiptType: '',
     handleType: '',
-    type: '2',
+    type: 'Register',
     receiptDateStart: '',
     receiptDateEnd: '',
     startPage: '1',

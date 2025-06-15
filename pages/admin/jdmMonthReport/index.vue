@@ -94,7 +94,7 @@ function checkQuery() {
 
 async function saveMemo() {
   const items = Array.isArray(queryResult.items) ? queryResult.items : []
-  const memoList = items.map(item => ({...memoListMapper(item), certDate: criteria.certDate, type: 1, agency: criteria.agency }))
+  const memoList = items.map(item => ({...memoListMapper(item), certDate: criteria.certDate, type: 'Month', agency: criteria.agency }))
   Object.assign(criteria, queryResult.items)
   try {
     if(addMemo.value)
@@ -209,7 +209,7 @@ function resetForm() {
                 <ClientOnly>
                   <el-button type="primary" plain @click="search()">
                     <AdminIcon name="i-carbon:search" class="pr-1" />
-                    查詢
+                    列印
                   </el-button>
                 </ClientOnly>
                 <el-button plain @click="resetForm()">

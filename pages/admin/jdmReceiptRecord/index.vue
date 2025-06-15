@@ -141,7 +141,7 @@ function resetForm() {
                 <ClientOnly>
                   <el-button type="primary" plain @click="search()">
                     <AdminIcon name="i-carbon:search" class="pr-1" />
-                    查詢
+                    列印
                   </el-button>
                 </ClientOnly>
                 <el-button plain @click="resetForm()">

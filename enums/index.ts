@@ -91,9 +91,9 @@ export const DailyReportPrintTypeSearch = generateEnum({
   雜項: '雜項',
   建設基金: '建設基金',
   其他: '其他',
-  '土地基金(雜項)': '土地基金(雜項)',
-  '土開基金(代收款)': '土開基金(代收款)',
-  '土開基金(保證金)': '土開基金(保證金)',
+  土地基金雜項: '土地基金雜項',
+  土開基金代收款: '土開基金代收款',
+  土開基金保證金: '土開基金保證金',
 })
 
 export const MonthReportPrintTypeSearch = generateEnum({

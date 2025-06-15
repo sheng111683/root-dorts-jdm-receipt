@@ -2,8 +2,12 @@
 import { ElMessage } from 'element-plus'
 import { downloadFile } from '~/utils/downloadFile'
 import {
+  getDefaultPageList,
   getDefaultagencyapply,
   getDefulatReceiptRegisterCriteria,
+  memoListMapper,
+  type MemoList,
+  type PagedList,
 } from '~/models'
 import { ReceiptType, ReceiptRegisterHandleType } from '~/enums'
 
@@ -21,16 +25,30 @@ const agencyapply = reactive([getDefaultagencyapply()])
 
 const agencyselect = await $api.v1.JdmReceipt.GetApplyAgency({})
 
+const queryResult = reactive(getDefaultPageList<any>())
+
 Object.assign(agencyapply, agencyselect)
 
 async function search() {
-  
+
+  queryResult.items = []
   if(checkQuery())
   {
     criteria.receiptDateStart = formatDate(criteria.receiptDateStart)
     criteria.receiptDateEnd = formatDate(criteria.receiptDateEnd)
+    const jdmReceiptMemoResponse = await $api.v1.JdmReceiptRegister.Get(criteria) as PagedList<MemoList>
+    Object.assign(queryResult, jdmReceiptMemoResponse)
     if(criteria.handleType == '備註摘要')
     {
+      if(Array.isArray(jdmReceiptMemoResponse.items) && jdmReceiptMemoResponse.items.length > 0 && jdmReceiptMemoResponse.items[0].memo != '')
+      {
+        addMemo.value = false
+      }
+      else
+      {
+        addMemo.value = true
+      }
+
     }
     else if(criteria.handleType == '列印')
     {
@@ -115,6 +133,31 @@ function resetForm() {
   criteria.receiptDateStart = ''
   criteria.receiptDateEnd = ''
   criteria.startPage = '1'
+  queryResult.items = []
+}
+
+async function saveMemo() {
+  const items = Array.isArray(queryResult.items) ? queryResult.items : []
+  const memoList = items.map(item => ({...memoListMapper(item), certDate: criteria.receiptDateStart + '-' + criteria.receiptDateEnd, type: 'Register', agency: criteria.agency }))
+  Object.assign(criteria, queryResult.items)
+  try {
+    if(addMemo.value)
+    {
+      const { status }: any = await $api.v1.JdmReceiptRegister.Post(memoList)
+      if (status && status !== 200)
+        throw new Error('新增失敗')
+      ElMessage.success('已新增')
+    }
+    else
+    {
+      const { status }: any = await $api.v1.JdmReceiptRegister.Put(memoList)
+      if (status && status !== 200)
+        throw new Error('更新失敗')
+      ElMessage.success('已更新')
+    }
+  } catch (err) {
+    alert('儲存失敗')
+  }
 }
 
 </script>
@@ -188,7 +231,7 @@ function resetForm() {
                 <ClientOnly>
                   <el-button type="primary" plain @click="search()">
                     <AdminIcon name="i-carbon:search" class="pr-1" />
-                    查詢
+                    列印
                   </el-button>
                 </ClientOnly>
                 <el-button plain @click="resetForm()">
@@ -198,6 +241,48 @@ function resetForm() {
               </el-col>
             </el-row>
           </el-form>
+        </el-card>
+
+        <el-card v-if="queryResult && queryResult.items && queryResult.items.length > 0" header="查詢結果" class="mt-4">
+          <!-- <el-row>
+            <el-col :lg="12" :xl="12" :xs="24" :sm="24">
+              <el-pagination
+                v-if="queryResult.totalItemCount > 0"
+                v-model:current-page="queryResult.pageNumber" v-model:page-size="queryResult.pageSize"
+                layout="total, prev, pager, next, jumper" :total="queryResult.totalItemCount"
+                @current-change="handleCurrentChange"
+              />
+            </el-col>
+          </el-row> -->
+          <el-table :data="queryResult.items" stripe style="width: 100%">
+            <el-table-column label="#" width="55">
+              <template #default="scope">
+                {{ scope.$index + 1 }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="row" label="行號" align="center">
+              <template #default="scope">
+                <el-input v-model="scope.row.row" placeholder="輸入內容" />
+              </template>
+            </el-table-column>
+            <el-table-column prop="memo" label="摘要" align="center">
+              <template #default="scope">
+                <el-input v-model="scope.row.memo" placeholder="輸入內容" />
+              </template>
+            </el-table-column>
+          </el-table>
+
+          <el-button type="primary" class="mt-4" @click="saveMemo">儲存</el-button>
+          <!-- <el-row class="mt-4">
+            <el-col :span="16">
+              <el-pagination
+                v-if="queryResult.totalItemCount > 0"
+                v-model:current-page="queryResult.pageNumber" v-model:page-size="queryResult.pageSize"
+                layout="total, prev, pager, next, jumper" :total="queryResult.totalItemCount"
+                @current-change="handleCurrentChange"
+              />
+            </el-col>
+          </el-row> -->
         </el-card>
       </el-col>
     </el-row>

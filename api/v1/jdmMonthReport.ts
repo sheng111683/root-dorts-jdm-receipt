@@ -11,3 +11,4 @@ export const Put = body => $apiPut<void>(`/v1/jdmMonthReport`, body)
 
 export const PrintMonthReport = body => $apiPost<void>(`/v1/jdmMonthReport/PrintMonthReport`, body)
 
+export const GetApplyAgency = body => $apiPost<void>(`/v1/jdmMonthReport/getApplyAgency`, body)

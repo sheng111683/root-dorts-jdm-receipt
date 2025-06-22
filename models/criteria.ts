@@ -247,6 +247,7 @@ export function getDefulatJDMReceiptCriteria() {
     paymentName: '',
     payMoney: '',
     makeDate: '',
+    paymentDate: '',
     removed: 'false',
   }, getDefaultCriteria())
 }
@@ -261,6 +262,7 @@ export function getDefulatJDMReceiptAddCriteria() {
     paymentName: '',
     payMoney: '',
     makeDate: '',
+    paymentDate:'',
     removed: false,
   }, getDefaultCriteria())
 }

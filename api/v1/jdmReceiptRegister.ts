@@ -11,3 +11,4 @@ export const Put = body => $apiPut<void>(`/v1/jdmReceiptRegister`, body)
 
 export const PrintReceiptRegister = body => $apiPost<void>(`/v1/jdmReceiptRegister/PrintReceiptRegister`, body)
 
+export const GetApplyAgency = body => $apiPost<void>(`/v1/jdmReceiptRegister/getApplyAgency`, body)

@@ -23,7 +23,7 @@ const drawerprint = ref(false)
 
 const agencyapply = reactive([getDefaultagencyapply()])
 
-const agencyselect = await $api.v1.JdmReceipt.GetApplyAgency({})
+const agencyselect = await $api.v1.JdmReceiptRegister.GetApplyAgency({})
 
 const queryResult = reactive(getDefaultPageList<any>())
 
@@ -107,7 +107,7 @@ async function PrintReceiptRegister() {
     const formattedTime = currentDate.toLocaleTimeString('en-US', { hour12: false }).replace(/:/g, '') // 去掉冒號
     const fileName = `收據登記簿_${formattedDate}_${formattedTime}.pdf`
 
-    const { status } = downloadFile(`${baseURL}/api/v1/jdmReceiptRegister/PrintReceiptRegister?agency=${criteria.agency.trim()}
+    const { status } = await downloadFile(`${baseURL}/api/v1/jdmReceiptRegister/PrintReceiptRegister?agency=${criteria.agency.trim()}
     &receiptType=${criteria.receiptType.trim()}&type=${criteria.type.trim()}&receiptDateStart=${criteria.receiptDateStart.trim()}
     &receiptDateEnd=${criteria.receiptDateEnd.trim()}&startPage=${criteria.startPage.trim()}`, fileName)
 

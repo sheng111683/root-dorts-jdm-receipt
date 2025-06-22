@@ -11,6 +11,7 @@ export interface JdmReceipt {
   paymentName: string
   payMoney: number
   makeDate: string | Date
+  paymentDate: string | Date
   receipt_count: number
   removed: boolean
 
@@ -28,6 +29,7 @@ export function jdmReceiptMapper(item: JdmReceipt) {
     paymentName,
     payMoney,
     makeDate,
+    paymentDate,
     receipt_count,
     removed,
   } = item
@@ -42,6 +44,7 @@ export function jdmReceiptMapper(item: JdmReceipt) {
     paymentName,
     payMoney,
     makeDate,
+    paymentDate,
     receipt_count,
     removed,
   }
@@ -67,6 +70,7 @@ export function getDefaultjdmReceipt(): JdmReceipt {
     paymentName: '',
     payMoney: 0,
     makeDate: '',
+    paymentDate: '',
     receipt_count: 0,
     removed: false,
   }

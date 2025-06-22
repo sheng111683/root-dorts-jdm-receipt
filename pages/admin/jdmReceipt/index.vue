@@ -49,7 +49,7 @@ async function search() {
   queryResult.AMT = 0
   queryResult.items = queryResult.items.map((item) => {
     if (item.makeDate) {
-      item.makeDate = dateFormat(item.makeDate)
+      item.makeDate = formatDates(item.makeDate)
     }
     queryResult.AMT += item.payMoney || 0
     return item
@@ -57,15 +57,22 @@ async function search() {
 }
 function formatDates(makeDate) {
   if (makeDate) {
-    const makeDateObj = new Date(makeDate)
-    const year = makeDateObj.getFullYear()
-    const month = String(makeDateObj.getMonth() + 1).padStart(2, '0')
-    const day = String(makeDateObj.getDate()).padStart(2, '0')
-    criteria.makeDate = `${year}/${month}/${day}`
+    criteria.makeDate = dateFormats(makeDate)
   }
 
   return criteria
 }
+function dateFormats(dateString) {
+  if (dateString) {
+    const date = new Date(dateString)
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    return `${year}/${month}/${day}`
+  }
+  return ''
+}
+
 function dateFormat(dateString) {
   const date = new Date(dateString)
   return date.toISOString().split('T')[0].replace(/-/g, '/')
@@ -85,7 +92,7 @@ async function handleEdit(encryptionId: string) {
     Object.assign(queryEditResult, jdmReceiptPrintResponse)
     queryEditResult.items = queryEditResult.items.map((item) => {
       if (item.printDate) {
-        item.printDate = dateFormat(item.printDate)
+        item.printDate = formatDates(item.printDate)
       }
       queryResult.AMT += item.payMoney || 0
       return item
@@ -144,13 +151,16 @@ function resetAddForm() {
   criteriaAdd.paymentName = ''
   criteriaAdd.payMoney = ''
   criteriaAdd.receiptType = ''
-  criteriaAdd.makeDate = new Date()
-  criteriaAdd.paymentDate = new Date()
+  criteriaAdd.makeDate = dateFormats(new Date());
+  criteriaAdd.paymentDate = dateFormats(new Date());
   criteriaAdd.removed = false
 }
 
 async function SaveAdd() {
   Object.assign(jdmReceipt, criteriaAdd)
+  jdmReceipt.makeDate = dateFormats(criteriaAdd.makeDate)
+  jdmReceipt.paymentDate = dateFormats(criteriaAdd.paymentDate)
+  console.log(jdmReceipt)
   const { status }: any = await $api.v1.JdmReceipt.Post([jdmReceipt])
   if (status && status !== 200)
     throw new Error('新增失敗')
@@ -171,6 +181,8 @@ async function SaveEdit() {
 
     if (criteriaEdit.encryptionId.length > 0) {
       formatEditDates(criteriaEdit.makeDate)
+      criteriaEdit.paymentDate = dateFormats(criteriaAdd.paymentDate)
+
       const { status }: any = await $api.v1.JdmReceipt.Put(criteriaEdit.encryptionId, criteriaEdit)
       if (status && status !== 200)
         throw new Error('儲存失敗')
@@ -234,7 +246,7 @@ async function PrintReceipt() {
     const formattedTime = currentDate.toLocaleTimeString('en-US', { hour12: false }).replace(/:/g, '') // 去掉冒號
     const fileName = `${formattedDate}_${formattedTime}.pdf`
 
-    const { status } = downloadFile(`${baseURL}/api/v1/jdmReceiptPrint/printReceipt?receiptPrintType=${RePrintReceipt.receiptPrintType.trim()}
+    const { status } = await downloadFile(`${baseURL}/api/v1/jdmReceiptPrint/printReceipt?receiptPrintType=${RePrintReceipt.receiptPrintType.trim()}
     &receiptPrintReason=${RePrintReceipt.receiptPrintReason.trim()}&receiptPrintModel=${RePrintReceipt.receiptPrintModel.trim()}&jdmReceiptIds=${payload}`, fileName)
 
     if (status && status !== 200) {
@@ -282,8 +294,8 @@ async function handleAdd() {
   const currentROCYear = currentYear - 1911 // 轉換為民國年
   drawer.value = true
   criteriaAdd.year = currentROCYear.toString()
-  criteriaAdd.makeDate = new Date()
-  criteriaAdd.paymentDate = new Date()
+  criteriaAdd.makeDate = dateFormats(new Date());
+  criteriaAdd.paymentDate = dateFormats(new Date());
 
 }
 </script>

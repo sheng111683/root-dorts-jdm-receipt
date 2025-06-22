@@ -24,7 +24,7 @@ const drawerprint = ref(false)
 
 const agencyapply = reactive([getDefaultagencyapply()])
 
-const agencyselect = await $api.v1.JdmReceipt.GetApplyAgency({})
+const agencyselect = await $api.v1.JdmMonthReport.GetApplyAgency({})
 
 Object.assign(agencyapply, agencyselect)
 
@@ -124,7 +124,7 @@ async function PrintMonthReport() {
     const formattedTime = currentDate.toLocaleTimeString('en-US', { hour12: false }).replace(/:/g, '') // 去掉冒號
     const fileName = `收據月報表_${formattedDate}_${formattedTime}.pdf`
 
-    const { status } = downloadFile(`${baseURL}/api/v1/jdmMonthReport/PrintMonthReport?agency=${criteria.agency.trim()}
+    const { status } = await downloadFile(`${baseURL}/api/v1/jdmMonthReport/PrintMonthReport?agency=${criteria.agency.trim()}
     &printType=${criteria.printType.trim()}&type=${criteria.type.trim()}&certDate=${criteria.certDate.trim()}`, fileName)
 
     if (status && status !== 200) {

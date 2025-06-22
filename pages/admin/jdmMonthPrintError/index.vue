@@ -17,7 +17,7 @@ const drawerprint = ref(false)
 
 const agencyapply = reactive([getDefaultagencyapply()])
 
-const agencyselect = await $api.v1.JdmReceipt.GetApplyAgency({})
+const agencyselect = await $api.v1.JdmMonthPrintError.GetApplyAgency({})
 
 Object.assign(agencyapply, agencyselect)
 
@@ -70,7 +70,7 @@ async function PrintReceiptPrintError() {
     const formattedTime = currentDate.toLocaleTimeString('en-US', { hour12: false }).replace(/:/g, '') // 去掉冒號
     const fileName = `列印異常月報表_${formattedDate}_${formattedTime}.pdf`
 
-    const { status } = downloadFile(`${baseURL}/api/v1/jdmMonthPrintError/PrintReceiptPrintError?agency=${criteria.agency.trim()}
+    const { status } = await downloadFile(`${baseURL}/api/v1/jdmMonthPrintError/PrintReceiptPrintError?agency=${criteria.agency.trim()}
     &receiptType=${criteria.receiptType.trim()}&printDate=${criteria.printDate.trim()}&type=${criteria.type.trim()}`, fileName)
 
     if (status && status !== 200) {

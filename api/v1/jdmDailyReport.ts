@@ -11,3 +11,4 @@ export const Put = body => $apiPut<void>(`/v1/jdmDailyReport`, body)
 
 export const PrintDailyReport = body => $apiPost<void>(`/v1/jdmDailyReport/PrintDailyReport`, body)
 
+export const GetApplyAgency = body => $apiPost<void>(`/v1/jdmDailyReport/getApplyAgency`, body)
